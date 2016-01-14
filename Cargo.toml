@@ -1,0 +1,25 @@
+[package]
+name = "imageflow"
+version = "0.0.1"
+description = "Fast image processing for the web"
+homepage = "https://github.com/imazen/imageflow"
+keywords = ["graphics", "gamedev"]
+license = "AGPL-3.0"
+authors = ["Nathanael Jones"]
+
+[features]
+unstable = []
+
+
+[lib]
+name = "imageflow"
+
+[dependencies]
+image = "*"
+mozjpeg-sys = "*"
+
+[dev_dependencies]
+env_logger = "*"
+log = "*"
+rand = "*"
+time = "*"
