@@ -16,6 +16,8 @@ env:
     - GCC_VERSION=49
     - GCC_VERSION=52
     - GCC_VERSION=53
+  global:
+   - secure: "ZCnVl71wkTwMMS4F0aiYQJ6DHW3sPRPAto2daS0KjZ7fF0Z7mgWuF2yr2MARuUWRLYyVMp4rC493ZnB4NBLf1vzFmX1ZzPzAt1JTkHr6PHpaPEDlWs26XvkwirW/EPMk6vjpO0MSfzPLoo9z3Ph1csbAF6lxRgFtCo9QsCRfCA0="
 
 matrix:
    include:
@@ -36,6 +38,19 @@ matrix:
 #         language: generic
 #         env:
 
+addons:
+  coverity_scan:
+    project:
+      name: "memsharded/imageflow"
+      description: "Imageflow + imageflow server"
+    notification_email: james@conan.io
+    build_command_prepend: ""
+    build_command:   ".travis/run.sh"
+    branch_pattern: coverity_scan
+
+before_install:
+  - test $TRAVIS_BRANCH != coverity_scan -o ${TRAVIS_JOB_NUMBER##*.} = 1 || exit 0
+
 install:
   - .travis/install.sh
 
@@ -43,7 +58,8 @@ before_script:
   - .travis/before_script.sh
 
 script:
-  - .travis/run.sh
+  - test $TRAVIS_BRANCH != coverity_scan || exit 0
+  - if [ "${COVERITY_SCAN_BRANCH}" != 1 ]; then .travis/run.sh ; fi
 
 after_success:
-  - .travis/after_success.sh
+  - if [ "${COVERITY_SCAN_BRANCH}" != 1 ]; then .travis/after_success.sh ; fi
