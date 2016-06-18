@@ -79,6 +79,7 @@ class ImageFlowConan(ConanFile):
         self.output.warn(cmake_build_command)
         self.run(cmake_build_command)
         if self.options.build_tests:
+            self.run("ctest -D NightlyMemoryCheck")
             self.run('ctest -V -C Release')
             
     def package(self):

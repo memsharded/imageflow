@@ -82,6 +82,7 @@ endif()
 if(ENABLE_TEST)
     include(CTest)
     enable_testing()
+		set(MEMORYCHECK_COMMAND /usr/bin/valgrind)
 
 	add_library(imageflow_test_helpers_OBJECTS OBJECT tests/helpers.c tests/helpers_visual.c tests/runner.cpp)
 	target_include_directories(imageflow_test_helpers_OBJECTS PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

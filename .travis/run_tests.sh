@@ -3,6 +3,10 @@ cd build
 
 #Download and build DSSIM
 sudo apt-get install -y pkg-config libpng12-dev
+echo "Install valgrind"
+sudo apt-get install valgrind -y
+which valgrind
+echo "Lets install DSSIM"
 wget https://github.com/pornel/dssim/archive/master.tar.gz
 tar xvzf master.tar.gz
 cd dssim-master
